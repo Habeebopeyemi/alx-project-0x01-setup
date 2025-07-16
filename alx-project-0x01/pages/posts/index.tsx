@@ -1,7 +1,7 @@
 import React from "react";
 import PostCard from "@/components/common/PostCard";
 import Header from "@/components/layout/Header";
-import { PostProps } from "@/interface";
+import { PostProps } from "@/interfaces";
 
 const Posts: React.FC<{ posts: PostProps[] }> = ({ posts }) => {
   //console.log(posts);
