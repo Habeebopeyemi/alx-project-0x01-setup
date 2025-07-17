@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { UserProps, UserModalProps } from "@/interfaces";
+import { UserProps, UserModalProps, NestedObject } from "@/interfaces";
 
 const UserModal: React.FC<UserModalProps> = ({ onClose, onSubmit }) => {
   const [user, setUser] = useState<UserProps>({
@@ -27,9 +27,6 @@ const UserModal: React.FC<UserModalProps> = ({ onClose, onSubmit }) => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    interface NestedObject {
-      [key: string]: any;
-    }
 
     setUser((prevUser: UserProps) => {
       console.log(prevUser);
