@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { UserData, UserModalProps } from "@/interfaces";
+import { UserProps, UserModalProps } from "@/interfaces";
 
 const UserModal: React.FC<UserModalProps> = ({ onClose, onSubmit }) => {
-  const [user, setUser] = useState<UserData>({
+  const [user, setUser] = useState<UserProps>({
     name: "",
     username: "",
     email: "",
@@ -27,11 +27,15 @@ const UserModal: React.FC<UserModalProps> = ({ onClose, onSubmit }) => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setUser(prevUser => {
+    interface NestedObject {
+      [key: string]: any;
+    }
+
+    setUser((prevUser: UserProps) => {
       console.log(prevUser);
-      const keys = name.split(".");
-      const newUserData: any = { ...prevUser };
-      let current: any = newUserData;
+      const keys: string[] = name.split(".");
+      const newUserData: NestedObject = { ...prevUser };
+      let current: NestedObject = newUserData;
 
       for (let i = 0; i < keys.length - 1; i++) {
         current[keys[i]] = { ...current[keys[i]] };
@@ -40,7 +44,7 @@ const UserModal: React.FC<UserModalProps> = ({ onClose, onSubmit }) => {
 
       console.log(current);
       current[keys[keys.length - 1]] = value;
-      return newUserData;
+      return newUserData as UserProps;
     });
   };
 
